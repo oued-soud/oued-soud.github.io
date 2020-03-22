@@ -20,9 +20,9 @@
 				padding:8px;
 				color:#fff;
 				background-color:#000;
-				font: 12px sans-serif;
-				max-width: 300px;
-				height: 40px;
+				font: 50px sans-serif;
+				max-width: 500px;
+				max-height: 300px;
 			}
 			
 				display: block;
@@ -110,9 +110,10 @@
 					.style("opacity", .9);
 				div.html("<b> ville : </b>" + e.chefs + "<br>"
 						+ "<b>cas : </b>" + e.cas + "<br>"
-						+ "<b>numero : </b>" + e.OBJECTID + "<br>")
-					.style("left", (d3.event.pageX + 30) + "px")     
-					.style("top", (d3.event.pageY - 30) + "px");
+						+ "<b>décès : </b>" + e.deces + "<br>"
+						+ "<b>gueries : </b>" + e.guerit + "<br>")
+					.style("left", (d3.event.pageX + 70) + "px")     
+					.style("top", (d3.event.pageY - 70) + "px");
 			})
 			.on("mouseout", function(d) {
 				div.style("opacity", 0);
@@ -131,7 +132,7 @@
  .style("font-size", "20px")
  .style("text-decoration", "underline")
  .style("font-weight", "bolder")
- .text("Visualisations des zones touchées  le COVID-19 au BURKINA-FASO ( nombres de cas, décès, guérissons) à la date du 21 Mars 2020");
+ .text("Visualisations des zones touchées  le COVID-19 au BURKINA-FASO ( nombres de cas, décès, guéries) à la date du 21 Mars 2020");
 
  svg.append("text")
  .attr("x", 1000)
@@ -149,8 +150,9 @@
  .attr("text-anchor", "middle")
  .style("font-size", "25px")
  .style("text-decoration", "underline")
-
  .text("Auteur : Souhoude OUEDRAOGO");	
+
+
 	// Append a DIV for the tooltip
 	var div = d3.select("body").append("div")   
 		.attr("class", "tooltip")               
