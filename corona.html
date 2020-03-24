@@ -27,11 +27,21 @@
 				display: block;
 			#svg {
 				margin: auto;
+
 			}
+
+				
+			#col1  {
+  
+
+  background: linear-gradient(to top ,  white, skyblue);
+ 
+ /*mise en forme de la couleur du forme*/
+}
 		</style>
 	</head>
  
-	<body>
+	<body id ="col1" >
 	<script type="text/javascript">
 		
 	</script>	
@@ -42,7 +52,7 @@
 
 	const width = 1200, 
 		height = 800,
-		colors = ['white','#fff0b3',   '#ffff4d', '#ff5c34','#991f00'];
+		colors = ['skyblue','#ffffe6',  '#ffff4d','#ffd11a',  '#ffd699', '#ffad33',  '#e68a00', '#ff5c33',  '#e62e00', '#991f00'];
 	
 	const path = d3.geoPath();
 	
@@ -79,16 +89,19 @@ Promise.all(promises).then(function(values) {
 		.enter()
 		.append("path")
 		.attr('id', function(d) {return "d" + d.properties.OBJECTID;})
-		.attr("stroke","grey")
+		.attr("stroke","black")
 		.attr("stroke-width",1.8)
 		.attr("d", path);
 
+	const min = d3.min(csv, function(e) { return +e.cas; }),
+		  max = d3.max(csv, function(e) { return +e.cas; });	
+
 	var quantile = d3.scaleQuantile()
-		.domain([-1, 6])
+		.domain([0, Math.sqrt(max )])
 		.range(colors);
 
 	var legend = svg.append('g')
-		.attr('transform', 'translate(980, 150)')
+		.attr('transform', 'translate(980, 110)')
 		.attr('id', 'legend');
 		
 		legend.selectAll()
@@ -98,19 +111,25 @@ Promise.all(promises).then(function(values) {
 				.attr('width', '40px')
 				.attr('x', 5)
 				.attr('y', function(d) { return d * 40; })
-				.attr("stroke","red")
-				.attr("stroke-width",1)
+				.attr("stroke-width",0)
 				.style("fill", function(d) { return colors[d]; });
+
+
+	
 				
-	var legendScale = d3.scaleLinear()
-		.domain([0,d3.max(csv, function(e) { return +e.cas; })])
+	var legendScale = d3.scaleSqrt()
+		.domain([0,max])
 		.range([0, colors.length * 40]);
+
+		var legendAxis = svg.append("g")
+		.attr('transform', 'translate(1040, 110)')
+		.call(d3.axisRight(legendScale).ticks(20));
 
 	
 	
 	csv.forEach(function(e,i) {
 		d3.select("#d" + e.OBJECTID)
-			.style("fill", function(d) { return quantile(+e.cas); })
+			.style("fill", function(d) { return quantile(Math.sqrt(+e.cas)); })
 			.on("mouseover", function(d) {
 				div.transition()        
 					.duration(200)      
@@ -139,7 +158,7 @@ Promise.all(promises).then(function(values) {
  .style("font-size", "20px")
  .style("text-decoration", "underline")
  .style("font-weight", "bolder")
- .text("Visualisations des zones touchées  le COVID-19 au BURKINA-FASO ( nombres de cas, décès, guéries) à la date du 22 Mars 2020");
+ .text("Visualisations des zones touchées  le COVID-19 au BURKINA-FASO ( nombres de cas, décès, guéries) à la date du 23 Mars 2020");
 
  svg.append("text")
  .attr("x", 1000)
@@ -166,7 +185,7 @@ Promise.all(promises).then(function(values) {
 		.style("opacity", 0);		
 	
 
-	svg.append("text")
+	/*svg.append("text")
  .attr("x", 1060)
  .attr("y", 185)
  .attr("text-anchor", "middle")
@@ -205,7 +224,7 @@ Promise.all(promises).then(function(values) {
  .attr("text-anchor", "middle")
  .style("font-size", "40px")
  .style("text-decoration", "")
- .text("89");
+ .text("66");*/
 
 
 </script>
