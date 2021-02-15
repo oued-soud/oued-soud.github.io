@@ -1,0 +1,13 @@
+Num_E,Num_P,role
+1000,P2,Responsable
+1000,P4,Responsable
+2000,P2,Programmeur
+2000,P4,Superviseur
+3000,P1,adjoint
+3000,P6,Operateur
+4000,P5,Prog-analyste
+5000,P6,Prog-analyste
+6000,P3,Responsable
+7000,P3,Responsable
+7000,P5,Responsable
+8000,P5,Operateur
